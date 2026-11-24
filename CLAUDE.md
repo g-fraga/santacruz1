@@ -1,30 +1,30 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Este arquivo orienta o Claude Code (claude.ai/code) ao trabalhar com o código deste repositório.
 
-## Project overview
+## Visão geral do projeto
 
-Academic landing page for Santa Cruz Bicycles, written in a single self-contained `index.html`. No build tools, no frameworks, no package manager — open the file directly in a browser.
+Landing page acadêmica da Santa Cruz Bicycles, feita em um único arquivo `index.html` autocontido. Sem ferramentas de build, sem frameworks, sem gerenciador de pacotes: basta abrir o arquivo no navegador.
 
-## Previewing the page
+## Visualizando a página
 
 ```bash
-# Any of these work:
-python3 -m http.server 8080     # then open http://localhost:8080
-xdg-open index.html             # Linux — opens directly in the default browser
+# Qualquer uma destas opções funciona:
+python3 -m http.server 8080     # depois abra http://localhost:8080
+xdg-open index.html             # Linux: abre direto no navegador padrão
 ```
 
-## Architecture
+## Arquitetura
 
-Everything lives in `index.html`:
+Tudo fica em `index.html`:
 
-- **CSS** — inline `<style>` block at the top; uses CSS custom properties defined on `:root` for the color palette (`--vermelho`, `--preto`, `--branco`, etc.) and `--angle` for the diagonal section cuts.
-- **Fonts** — Google Fonts: `Barlow Condensed` for headings, buttons, labels and numbers; `Inter` for body text.
-- **Sections** — each has a unique `id` used by the sticky nav (`#marca`, `#identidade`, `#tecnologia`, `#modelos`, `#personalizacao`, `#experiencia`, `#contato`). The large outlined background numbers come from a `data-num` attribute (rendered via `[data-num]::before`). Dark sections with class `angle-bottom` get a diagonal bottom edge; the next section is pulled up underneath it.
-- **Responsive layout** — two `@media` breakpoints: `max-width:1000px` (tablets) and `max-width:650px` (phones).
-- **JavaScript** — small inline script at the end of `<body>`: scroll reveal animations (IntersectionObserver), header shadow on scroll, and color swatch selection in Personalização.
-- **Images** — all in the project root. Product photos `MY27_*.webp` have transparent backgrounds. `logo-santacruz.png` (header), `logo-santacruz-branco.png` (footer) and `favicon.png` were generated from `santa-cruz-bicycles-logo-vector.png`. `bikeazul.png`, `bikeverde.png` and `images.png` have white backgrounds, so model cards use `mix-blend-mode:multiply` to hide them.
+- **CSS**: bloco `<style>` inline no topo. Usa variáveis CSS definidas em `:root` para a paleta de cores (`--vermelho`, `--preto`, `--branco` etc.) e `--angle` para os cortes diagonais entre seções.
+- **Fontes**: Google Fonts. `Barlow Condensed` para títulos, botões, rótulos e números; `Inter` para o texto corrido.
+- **Seções**: cada uma tem um `id` único usado pelo menu fixo (`#marca`, `#identidade`, `#tecnologia`, `#modelos`, `#personalizacao`, `#experiencia`, `#contato`). Os números grandes em contorno no fundo vêm do atributo `data-num` (renderizado por `[data-num]::before`). Seções escuras com a classe `angle-bottom` ganham uma borda inferior diagonal, e a seção seguinte sobe por baixo dela.
+- **Layout responsivo**: dois breakpoints `@media`, `max-width:1000px` (tablets) e `max-width:650px` (celulares).
+- **JavaScript**: pequeno script inline no fim do `<body>`, com as animações de entrada ao rolar (IntersectionObserver), a sombra do header ao rolar e a seleção de cores na seção Personalização.
+- **Imagens**: todas na raiz do projeto. As fotos de produto `MY27_*.webp` têm fundo transparente. `logo-santacruz.png` (cabeçalho), `logo-santacruz-branco.png` (rodapé) e `favicon.png` foram gerados a partir de `santa-cruz-bicycles-logo-vector.png`. `bikeazul.png`, `bikeverde.png` e `images.png` têm fundo branco, por isso os cards de modelos usam `mix-blend-mode:multiply` para escondê-lo. `docs/preview.png` é a imagem de prévia usada no README.
 
-## Notes
+## Observações
 
-- `logo01.png` is actually an AVIF file with a `.png` extension and is no longer referenced by the page.
+- `logo01.png` é na verdade um arquivo AVIF com extensão `.png` e não é mais usado pela página.
