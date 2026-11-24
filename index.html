@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Landing page acadêmica inspirada na identidade da Santa Cruz Bicycles, com foco em mountain bike de alta performance.">
   <title>Santa Cruz Bicycles — Alta Performance</title>
+  <meta name="theme-color" content="#a00404">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -21,21 +28,22 @@
       --max:1180px;
       --radius:0px;
       --shadow:0 18px 50px rgba(0, 0, 0, 0.16);
+      --angle:56px;
     }
 
     *{box-sizing:border-box}
 
     html{
       scroll-behavior:smooth;
-      scroll-padding-top:84px;
+      scroll-padding-top:96px;
     }
 
     body{
       margin:0;
       background:var(--branco);
       color:var(--texto);
-      font-family:Arial, Helvetica, sans-serif;
-      line-height:1.6;
+      font-family:'Inter',Arial,Helvetica,sans-serif;
+      line-height:1.65;
     }
 
     img{
@@ -61,20 +69,35 @@
     .eyebrow{
       margin:0 0 10px;
       color:var(--vermelho);
-      font-size:.78rem;
+      font-size:.82rem;
       font-weight:800;
-      letter-spacing:.16em;
+      letter-spacing:.2em;
       text-transform:uppercase;
+      font-family:'Barlow Condensed',"Arial Narrow",sans-serif;
     }
 
     h1,h2,h3,h4,
     .nav-links a,
-    .button,
-    .logo-word{
-      font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;
+    .button{
+      font-family:'Barlow Condensed',"Arial Narrow","Helvetica Neue",Arial,sans-serif;
       font-weight:900;
       text-transform:uppercase;
-      letter-spacing:.02em;
+      letter-spacing:.01em;
+    }
+
+    /* números e rótulos de destaque usam a fonte de display, não a Inter em negrito sintético */
+    .stat strong,
+    .hero-stat strong,
+    .step-num,
+    .kit-name,
+    .frame-opt strong,
+    .wheel-opt strong,
+    .bullet-card strong,
+    .model-copy .tag,
+    .feature .number,
+    .badge,
+    .color-swatch::after{
+      font-family:'Barlow Condensed',"Arial Narrow",sans-serif;
     }
 
     h1,h2,h3,h4,p{margin-top:0}
@@ -87,9 +110,9 @@
     }
 
     h2{
-      font-size:clamp(2.1rem, 4vw, 4rem);
-      line-height:1;
-      margin-bottom:16px;
+      font-size:clamp(2.2rem, 4.2vw, 4.2rem);
+      line-height:.95;
+      margin-bottom:18px;
     }
 
     h3{
@@ -108,17 +131,32 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:48px;
-      padding:13px 20px;
+      gap:10px;
+      min-height:50px;
+      padding:14px 26px;
+      font-size:.95rem;
+      font-weight:800;
+      letter-spacing:.12em;
       background:var(--vermelho);
       color:var(--branco);
       border:2px solid var(--vermelho);
-      transition:.2s ease;
+      transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .button::after{
+      content:"→";
+      font-family:'Inter',Arial,sans-serif;
+      font-weight:400;
+      transition:transform .2s ease;
     }
 
     .button:hover{
       background:var(--branco);
       color:var(--vermelho);
+    }
+
+    .button:hover::after{
+      transform:translateX(4px);
     }
 
     .button--light{
@@ -136,9 +174,16 @@
       position:sticky;
       top:0;
       z-index:50;
-      background:rgba(250, 244, 244, 0.96);
-      border-bottom:2px solid var(--vermelho);
-      backdrop-filter:blur(8px);
+      background:rgba(253,252,252,0.97);
+      border-top:4px solid var(--vermelho);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      backdrop-filter:blur(10px);
+      transition:box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .site-header.is-scrolled{
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      border-bottom-color:transparent;
     }
 
     .header-row{
@@ -156,25 +201,47 @@
     }
 
     .brand img{
-      width:155px;
-      height:auto;
+      height:22px;
+      width:auto;
+      transition:opacity .2s ease;
+    }
+
+    .brand:hover img{
+      opacity:.7;
     }
 
     .nav-links{
       display:flex;
       align-items:center;
       justify-content:flex-end;
-      gap:24px;
-      color:var(--branco);
+      gap:28px;
+      color:var(--texto);
     }
 
     .nav-links a{
-      font-size:.83rem;
+      font-size:.88rem;
+      letter-spacing:.08em;
       transition:.2s ease;
+      position:relative;
+    }
+
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      bottom:-3px;
+      left:0;
+      width:0;
+      height:2px;
+      background:var(--vermelho);
+      transition:width .2s ease;
     }
 
     .nav-links a:hover{
-      color:#ff3b3b;
+      color:var(--vermelho);
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
     }
 
     .mobile-nav{
@@ -185,7 +252,7 @@
     .hero{
       background:var(--preto);
       color:var(--branco);
-      min-height:calc(100vh - 82px);
+      min-height:calc(100vh - 87px);
       display:grid;
       align-items:end;
       overflow:hidden;
@@ -197,8 +264,8 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.63) 42%, rgba(0,0,0,.10) 76%),
-        linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,.06) 60%);
+        linear-gradient(90deg, rgba(0,0,0,.97) 0%, rgba(0,0,0,.78) 46%, rgba(0,0,0,.08) 80%),
+        linear-gradient(0deg, rgba(0,0,0,.80), rgba(0,0,0,.0) 55%);
       z-index:1;
     }
 
@@ -211,37 +278,79 @@
     }
 
     .hero-media img{
-      width:min(76vw, 980px);
+      width:min(74vw, 960px);
       height:100%;
       object-fit:contain;
       object-position:right center;
-      filter:contrast(1.03);
-      padding:40px 0 20px;
-      opacity:.95;
+      filter:contrast(1.05) brightness(.92);
+      padding:40px 0 0;
+      opacity:.9;
     }
 
     .hero-content{
       position:relative;
       z-index:2;
-      padding:100px 0 110px;
+      padding:110px 0 90px;
     }
 
-    .hero-tag{
-      display:inline-block;
-      padding:7px 10px;
-      border-left:4px solid var(--vermelho);
-      background:rgba(255,255,255,.06);
-      color:#f3f3f3;
-      margin-bottom:22px;
-      font-size:.8rem;
-      letter-spacing:.12em;
+    /* linha vermelha decorativa acima do título */
+    .hero-rule{
+      display:block;
+      width:48px;
+      height:3px;
+      background:var(--vermelho);
+      margin-bottom:28px;
+    }
+
+    /* "Feitas para" — linha pequena acima */
+    .hero-h1-label{
+      display:block;
+      font-size:clamp(.8rem, 1.4vw, 1rem);
+      font-weight:700;
+      letter-spacing:.32em;
       text-transform:uppercase;
+      color:#9a9a9a;
+      margin-bottom:20px;
+    }
+
+    /* "NÃO" — enorme, apenas contorno */
+    .hero-h1-stroke{
+      display:block;
+      font-size:clamp(5rem, 12vw, 11.5rem);
+      line-height:.88;
+      color:transparent;
+      -webkit-text-stroke:2px var(--branco);
+      font-family:'Barlow Condensed',"Arial Narrow","Helvetica Neue",Arial,sans-serif;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.02em;
+    }
+
+    /* "QUEBRAR." — enorme, sólido branco */
+    .hero-h1-solid{
+      display:block;
+      font-size:clamp(5rem, 12vw, 11.5rem);
+      line-height:.88;
+      color:var(--branco);
+      font-family:'Barlow Condensed',"Arial Narrow","Helvetica Neue",Arial,sans-serif;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.02em;
+      margin-bottom:36px;
+    }
+
+    /* ponto final em vermelho */
+    .hero-h1-solid .dot{
+      color:var(--vermelho);
     }
 
     .hero-copy{
-      max-width:650px;
-      color:#dadada;
-      font-size:1.12rem;
+      max-width:580px;
+      color:#adadad;
+      font-size:1rem;
+      line-height:1.65;
+      border-left:3px solid var(--vermelho);
+      padding-left:16px;
     }
 
     .hero-actions{
@@ -249,6 +358,45 @@
       flex-wrap:wrap;
       gap:12px;
       margin-top:30px;
+    }
+
+    /* faixa de stats no rodapé do hero */
+    .hero-stats{
+      display:flex;
+      gap:0;
+      margin-top:52px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:28px;
+    }
+
+    .hero-stat{
+      padding-right:40px;
+      border-right:1px solid rgba(255,255,255,.1);
+      margin-right:40px;
+    }
+
+    .hero-stat:last-child{
+      border-right:none;
+      margin-right:0;
+      padding-right:0;
+    }
+
+    .hero-stat strong{
+      display:block;
+      font-size:1.75rem;
+      font-weight:900;
+      color:var(--branco);
+      letter-spacing:.02em;
+      line-height:1;
+    }
+
+    .hero-stat span{
+      display:block;
+      font-size:.7rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#666;
+      margin-top:5px;
     }
 
     /* INTRO */
@@ -265,6 +413,10 @@
       color:var(--branco);
     }
 
+    .section--dark .lead{
+      color:#b0b0b0;
+    }
+
     .intro-grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
@@ -273,24 +425,54 @@
     }
 
     .quote-card{
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
       background:var(--preto);
       color:var(--branco);
-      padding:44px;
+      padding:72px 48px 44px;
       border-left:8px solid var(--vermelho);
       box-shadow:var(--shadow);
     }
 
+    .quote-card::before{
+      content:"\201C";
+      position:absolute;
+      top:-.1em;
+      right:.04em;
+      z-index:-1;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:17rem;
+      line-height:1;
+      color:var(--vermelho);
+      opacity:.45;
+      pointer-events:none;
+    }
+
     .quote-card p{
-      font-size:1.55rem;
-      line-height:1.25;
+      font-family:'Barlow Condensed',"Arial Narrow",sans-serif;
+      font-style:italic;
       font-weight:700;
-      margin-bottom:14px;
+      font-size:clamp(1.8rem, 2.7vw, 2.3rem);
+      line-height:1.1;
+      margin-bottom:26px;
     }
 
     .quote-card small{
+      display:flex;
+      align-items:center;
+      gap:12px;
       color:#a8a8a8;
+      font-size:.72rem;
       text-transform:uppercase;
-      letter-spacing:.1em;
+      letter-spacing:.14em;
+    }
+
+    .quote-card small::before{
+      content:"";
+      flex:0 0 28px;
+      height:2px;
+      background:var(--vermelho);
     }
 
     .stats{
@@ -308,7 +490,7 @@
     .stat strong{
       display:block;
       color:var(--vermelho);
-      font-size:2rem;
+      font-size:2.5rem;
       line-height:1;
       font-weight:900;
     }
@@ -328,45 +510,21 @@
       align-items:start;
     }
 
-    .logo-panel{
-      background:var(--preto);
-      min-height:330px;
-      display:grid;
-      place-items:center;
-      padding:40px;
-    }
-
-    .logo-panel img{
-      width:min(100%, 320px);
-    }
-
-    .palette{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:25px;
-    }
-
-    .swatch{
-      min-height:125px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      padding:16px;
-      color:var(--branco);
-      font-weight:800;
-    }
-
-    .swatch--black{background:#000}
-
-    .swatch--white{
+    /* painel da imagem na seção identidade */
+    .identity-img-wrap{
       background:#fff;
-      color:#000;
-      border:1px solid #ddd;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      min-height:380px;
+      padding:32px;
     }
 
-    .swatch--red{
-      background:#cc0000;
+    .identity-img-wrap img{
+      width:100%;
+      max-height:420px;
+      object-fit:contain;
     }
 
     .bullet-grid{
@@ -384,6 +542,10 @@
     .bullet-card strong{
       display:block;
       margin-bottom:5px;
+      font-size:1.1rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
     }
 
     /* TECNOLOGIA */
@@ -403,7 +565,7 @@
 
     .feature .number{
       color:var(--vermelho);
-      font-size:.78rem;
+      font-size:.9rem;
       font-weight:900;
       letter-spacing:.15em;
     }
@@ -433,29 +595,32 @@
     }
 
     .model{
-      background:#f5f5f5;
-      border-top:4px solid var(--preto);
+      background:#fff;
+      border:1px solid #e8e8e8;
+      border-top:3px solid transparent;
       display:flex;
       flex-direction:column;
       min-height:100%;
       overflow:hidden;
-      transition:transform .2s ease, box-shadow .2s ease;
+      transition:transform .25s ease, box-shadow .25s ease, border-top-color .25s ease;
     }
 
     .model:hover{
-      transform:translateY(-5px);
-      box-shadow:var(--shadow);
+      transform:translateY(-6px);
+      box-shadow:0 24px 48px rgba(0,0,0,.1);
+      border-top-color:var(--vermelho);
     }
 
     .model-media{
-      background:#fff;
-      padding:14px;
+      background:#f7f7f7;
+      padding:20px;
     }
 
     .model-media img{
       width:100%;
       aspect-ratio:1/1;
       object-fit:contain;
+      mix-blend-mode:multiply;
     }
 
     .model-copy{
@@ -465,7 +630,7 @@
 
     .model-copy .tag{
       color:var(--vermelho);
-      font-size:.72rem;
+      font-size:.82rem;
       font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -478,83 +643,327 @@
     }
 
     /* PERSONALIZAÇÃO */
-    .custom-grid{
+    .config-section{
+      padding:100px 0;
+      background:var(--preto-2);
+      color:var(--branco);
+    }
+
+    .config-intro{
+      max-width:680px;
+      margin-bottom:60px;
+    }
+
+    .config-intro .lead{
+      color:#c0c0c0;
+    }
+
+    .config-blocks{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:50px;
-      align-items:center;
+      gap:40px;
     }
 
-    .custom-list{
-      list-style:none;
+    .config-block{
+      border-top:3px solid var(--vermelho);
+      padding-top:28px;
+    }
+
+    .config-block h3{
+      color:var(--branco);
+      font-size:1rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+
+    /* cores */
+    .color-swatches{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .color-swatch{
+      width:52px;
+      height:52px;
+      position:relative;
+      cursor:pointer;
+      flex-shrink:0;
       padding:0;
-      margin:28px 0 0;
+      border:0;
+      border-radius:0;
+      -webkit-appearance:none;
+      appearance:none;
+      transition:transform .15s ease, box-shadow .15s ease;
     }
 
-    .custom-list li{
-      padding:16px 0;
-      border-bottom:1px solid #d5d5d5;
+    .color-swatch:hover{
+      transform:translateY(-2px);
     }
 
-    .custom-list strong{
-      display:block;
-      margin-bottom:4px;
+    .color-swatch[aria-pressed="true"]{
+      box-shadow:0 0 0 2px var(--preto-2), 0 0 0 4px var(--branco);
     }
 
-    .gallery{
+    .color-swatch:focus-visible{
+      outline:2px solid var(--vermelho);
+      outline-offset:5px;
+    }
+
+    .color-swatch::after{
+      content:attr(data-name);
+      position:absolute;
+      bottom:calc(100% + 10px);
+      left:50%;
+      transform:translateX(-50%) translateY(4px);
+      white-space:nowrap;
+      font-size:.75rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff;
+      background:#111;
+      border:1px solid #333;
+      padding:5px 9px;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .15s ease, transform .15s ease;
+      z-index:10;
+    }
+
+    .color-swatch:hover::after,
+    .color-swatch:focus-visible::after,
+    .color-swatch[aria-pressed="true"]::after{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    /* ao passar o mouse em outra cor, esconde o nome da cor selecionada para não sobrepor */
+    .color-swatches:hover .color-swatch[aria-pressed="true"]:not(:hover)::after{
+      opacity:0;
+    }
+
+    /* quadros */
+    .frame-options{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns:1fr 1fr 1fr;
       gap:12px;
     }
 
-    .gallery img{
-      width:100%;
-      aspect-ratio:1/1;
-      object-fit:contain;
-      background:#fff;
-      padding:8px;
+    .frame-opt{
+      background:#111;
+      border:1px solid #2a2a2a;
+      border-top:3px solid #333;
+      padding:16px 14px;
+      transition:.2s ease;
     }
 
-    .gallery img:first-child{
-      grid-row:span 2;
-      aspect-ratio:auto;
-      min-height:100%;
+    .frame-opt:hover{
+      border-top-color:var(--vermelho);
+    }
+
+    .frame-opt strong{
+      display:block;
+      font-size:1rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .frame-opt span{
+      display:block;
+      color:#888;
+      font-size:.75rem;
+      line-height:1.4;
+    }
+
+    .frame-opt .badge{
+      display:inline-block;
+      margin-top:8px;
+      padding:2px 8px;
+      background:var(--vermelho);
+      color:#fff;
+      font-size:.7rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    /* rodas */
+    .wheel-options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .wheel-opt{
+      background:#111;
+      border:1px solid #2a2a2a;
+      padding:18px;
+    }
+
+    .wheel-opt strong{
+      display:block;
+      font-size:1rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin-bottom:5px;
+    }
+
+    .wheel-opt span{
+      color:#888;
+      font-size:.78rem;
+      line-height:1.4;
+    }
+
+    /* build kits */
+    .kits-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .kit{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#111;
+      border:1px solid #2a2a2a;
+      padding:14px 18px;
+      gap:12px;
+    }
+
+    .kit-name{
+      font-size:1.05rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .kit-desc{
+      color:#888;
+      font-size:.75rem;
+      flex:1;
+      text-align:right;
     }
 
     /* PÚBLICO + UX */
-    .info-grid{
+    .experience-dark{
+      background:var(--cinza);
+      padding:100px 0;
+    }
+
+    .experience-banner{
+      overflow:hidden;
+      background:var(--preto);
+      color:var(--branco);
+      padding:60px;
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:20px;
-      margin-top:38px;
+      gap:60px;
+      align-items:center;
+      margin-bottom:40px;
     }
 
-    .info-card{
-      border:1px solid #ddd;
-      padding:28px;
+    .experience-banner h2{
+      margin-bottom:0;
+    }
+
+    .experience-banner p{
+      color:#b8b8b8;
+      font-size:1.05rem;
+      margin-bottom:0;
+    }
+
+    .journey-steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:0;
+    }
+
+    .journey-step{
+      border-top:4px solid var(--vermelho);
+      padding:28px 24px;
       background:#fff;
+      border-right:1px solid #e5e5e5;
+      position:relative;
     }
 
-    .info-card ul{
-      margin:10px 0 0;
-      padding-left:20px;
+    .journey-step:last-child{
+      border-right:none;
     }
 
-    .info-card li + li{
-      margin-top:8px;
+    .journey-step .step-num{
+      font-size:3.4rem;
+      font-weight:900;
+      color:#e6e6e6;
+      line-height:1;
+      margin-bottom:12px;
+    }
+
+    .journey-step h4{
+      font-size:.88rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .journey-step p{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-bottom:0;
     }
 
     /* CTA */
     .cta{
-      background:var(--vermelho);
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      background:radial-gradient(120% 140% at 100% 50%, var(--vermelho-2) 0%, var(--vermelho) 45%, #6e0202 100%);
       color:var(--branco);
-      text-align:center;
-      padding:90px 0;
+      padding:130px 0;
+    }
+
+    /* bike em silhueta escura, mesclada ao vermelho */
+    .cta-bike{
+      position:absolute;
+      z-index:-1;
+      right:-4%;
+      top:50%;
+      width:min(64vw, 900px);
+      transform:translateY(-50%);
+      filter:grayscale(1) brightness(.3) contrast(1.3);
+      mix-blend-mode:multiply;
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .cta .eyebrow{
+      color:#ffd2d2;
+    }
+
+    .cta h2{
+      font-size:clamp(2.8rem, 6vw, 5.6rem);
+      line-height:.9;
+      max-width:640px;
+      margin-bottom:22px;
+    }
+
+    .cta h2 .dot{
+      color:var(--preto);
     }
 
     .cta .lead{
       color:#ffe7e7;
-      margin:0 auto 28px;
+      max-width:500px;
+      margin:0 0 32px;
+    }
+
+    .cta-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
     }
 
     .cta .button{
@@ -565,6 +974,17 @@
     .cta .button:hover{
       background:var(--branco);
       color:var(--preto);
+      border-color:var(--branco);
+    }
+
+    .cta .button--light{
+      background:transparent;
+      border-color:rgba(255,255,255,.7);
+    }
+
+    .cta .button--light:hover{
+      background:var(--branco);
+      color:var(--vermelho);
       border-color:var(--branco);
     }
 
@@ -602,11 +1022,95 @@
       color:var(--branco);
     }
 
-    .sources{
-      border-top:1px solid var(--linha);
-      margin-top:35px;
-      padding-top:18px;
-      font-size:.8rem;
+    .footer-logo{
+      width:170px;
+      margin-bottom:20px;
+    }
+
+    .footer-tagline{
+      font-size:.88rem;
+      font-style:italic;
+      color:#8a8a8a;
+      border-left:3px solid var(--vermelho);
+      padding-left:12px;
+      margin-top:14px;
+      line-height:1.55;
+    }
+
+    .footer-bottom{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-top:1px solid #1c1c1c;
+      margin-top:40px;
+      padding-top:20px;
+      font-size:.7rem;
+      color:#7a7a7a;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    /* NÚMEROS DECORATIVOS DAS SEÇÕES — contorno, mesma linguagem do "NÃO" do hero */
+    [data-num]{
+      position:relative;
+      isolation:isolate;
+    }
+
+    [data-num]::before{
+      content:attr(data-num);
+      position:absolute;
+      top:-.42em;
+      left:-.04em;
+      z-index:-1;
+      font-family:'Barlow Condensed',"Arial Narrow",sans-serif;
+      font-weight:900;
+      font-size:clamp(7rem, 15vw, 14rem);
+      line-height:1;
+      color:transparent;
+      -webkit-text-stroke:1.5px rgba(0,0,0,.08);
+      pointer-events:none;
+      user-select:none;
+    }
+
+    .section--dark [data-num]::before,
+    .config-section [data-num]::before,
+    .experience-banner[data-num]::before{
+      -webkit-text-stroke-color:rgba(255,255,255,.1);
+    }
+
+    .experience-banner[data-num]::before{
+      top:auto;
+      bottom:-.2em;
+      left:auto;
+      right:.06em;
+    }
+
+    /* CORTE DIAGONAL na base das seções escuras; a seção seguinte sobe por baixo */
+    .angle-bottom{
+      position:relative;
+      z-index:2;
+      clip-path:polygon(0 0, 100% 0, 100% calc(100% - var(--angle)), 0 100%);
+    }
+
+    .angle-bottom + .section,
+    .angle-bottom + .experience-dark{
+      margin-top:calc(var(--angle) * -1);
+      padding-top:calc(100px + var(--angle));
+    }
+
+    /* REVEAL ANIMATIONS */
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(28px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+    }
+
+    .reveal.is-visible{
+      animation:fadeUp .55s cubic-bezier(.22,.61,.36,1) forwards;
     }
 
     /* MOBILE */
@@ -621,7 +1125,7 @@
 
       .mobile-nav summary{
         list-style:none;
-        color:var(--branco);
+        color:var(--texto);
         cursor:pointer;
         font-weight:900;
         font-size:1.4rem;
@@ -656,24 +1160,56 @@
         font-weight:900;
       }
 
+      .brand img{
+        height:18px;
+      }
+
       .hero-media img{
         width:100%;
-        opacity:.55;
+        opacity:.4;
         object-position:center;
       }
 
       .hero::before{
-        background:linear-gradient(90deg,rgba(0,0,0,.93),rgba(0,0,0,.60));
+        background:linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.70));
       }
 
       .hero-content{
-        padding:90px 0 75px;
+        padding:90px 0 60px;
+      }
+
+      .hero-stats{
+        flex-wrap:wrap;
+        gap:20px;
+      }
+
+      .hero-stat{
+        padding-right:0;
+        border-right:none;
+        margin-right:0;
+        min-width:120px;
       }
 
       .intro-grid,
       .identity-grid,
-      .custom-grid{
+      .config-blocks{
         grid-template-columns:1fr;
+      }
+
+      .cta-bike{
+        width:120%;
+        right:-45%;
+        opacity:.4;
+      }
+
+      .journey-steps{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .experience-banner{
+        grid-template-columns:1fr;
+        gap:24px;
+        padding:40px;
       }
 
       .feature-grid{
@@ -684,18 +1220,42 @@
         grid-template-columns:repeat(2,1fr);
       }
 
-      .info-grid{
-        grid-template-columns:1fr;
+      .section-head{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:4px;
       }
     }
 
     @media (max-width:650px){
+      :root{
+        --angle:28px;
+      }
+
       .container{
         width:min(var(--max), calc(100% - 26px));
       }
 
       .section{
         padding:70px 0;
+      }
+
+      .angle-bottom + .section{
+        padding-top:calc(70px + var(--angle));
+      }
+
+      .quote-card{
+        padding:56px 28px 32px;
+      }
+
+      .cta{
+        padding:90px 0;
+      }
+
+      .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
       }
 
       h1{
@@ -710,21 +1270,20 @@
         grid-template-columns:1fr;
       }
 
-      .palette{
-        grid-template-columns:1fr;
-      }
-
       .bullet-grid{
         grid-template-columns:1fr;
       }
 
-      .gallery{
-        grid-template-columns:1fr 1fr;
+      .journey-steps{
+        grid-template-columns:1fr;
       }
 
-      .gallery img:first-child{
-        grid-column:span 2;
-        grid-row:auto;
+      .frame-options{
+        grid-template-columns:1fr;
+      }
+
+      .wheel-options{
+        grid-template-columns:1fr;
       }
 
       .footer-grid{
@@ -741,6 +1300,21 @@
       .model{
         transition:none;
       }
+
+      .reveal,
+      .reveal.is-visible{
+        opacity:1 !important;
+        transform:none !important;
+        animation:none !important;
+      }
+
+      .nav-links a::after,
+      .button::after,
+      .site-header,
+      .brand img,
+      .color-swatch{
+        transition:none;
+      }
     }
   </style>
 </head>
@@ -749,7 +1323,8 @@
   <header class="site-header">
     <div class="container header-row">
 
-        <img src="logo01.png" alt="Logotipo">
+      <a class="brand" href="#inicio" aria-label="Santa Cruz Bicycles — voltar ao início">
+        <img src="logo-santacruz.png" alt="Santa Cruz Bicycles">
       </a>
 
       <nav class="nav-links" aria-label="Navegação principal">
@@ -779,21 +1354,20 @@
 
   <main id="inicio">
 
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero angle-bottom" aria-labelledby="hero-title">
 
       <div class="hero-media" aria-hidden="true">
-        <img src="bikeverde.jpeg" alt="...">
+        <img src="MY27_stig_sage_angled.webp" alt="Santa Cruz">
       </div>
 
       <div class="container hero-content">
 
-        <p class="hero-tag">
-          Mountain Bike desde 1994
-        </p>
+        <span class="hero-rule" aria-hidden="true"></span>
 
         <h1 id="hero-title">
-          Feitas para<br>
-          não quebrar.
+          <span class="hero-h1-label">Feitas para</span>
+          <span class="hero-h1-stroke">não</span>
+          <span class="hero-h1-solid">quebrar<span class="dot">.</span></span>
         </h1>
 
         <p class="hero-copy">
@@ -811,18 +1385,37 @@
           </a>
         </div>
 
+        <div class="hero-stats" aria-label="Destaques da marca">
+          <div class="hero-stat">
+            <strong>1994</strong>
+            <span>Fundação</span>
+          </div>
+          <div class="hero-stat">
+            <strong>15+</strong>
+            <span>Modelos ativos</span>
+          </div>
+          <div class="hero-stat">
+            <strong>Vitalícia</strong>
+            <span>Garantia de quadro</span>
+          </div>
+          <div class="hero-stat">
+            <strong>VPP</strong>
+            <span>Tecnologia exclusiva</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
 
     <section class="section" id="marca" aria-labelledby="marca-title">
 
-      <div class="container intro-grid">
+      <div class="container intro-grid" data-num="01">
 
         <div>
 
           <p class="eyebrow">
-            01 — A marca
+            A marca
           </p>
 
           <h2 id="marca-title">
@@ -865,7 +1458,7 @@
         <aside class="quote-card">
 
           <p>
-            “Bicicletas que não quebram e que entregam a melhor experiência de pilotagem possível.”
+            Bicicletas que não quebram e que entregam a melhor experiência de pilotagem possível.
           </p>
 
           <small>
@@ -881,12 +1474,12 @@
 
     <section class="section section--gray" id="identidade" aria-labelledby="identity-title">
 
-      <div class="container identity-grid">
+      <div class="container identity-grid" data-num="02">
 
         <div>
 
           <p class="eyebrow">
-            02 — Identidade visual
+            Identidade visual
           </p>
 
           <h2 id="identity-title">
@@ -932,16 +1525,8 @@
 
         </div>
 
-        <div>
-          
-            <img src="santa-cruz-v10-8-cc-mx-24-dh-s-574146-1.jpeg" alt="bike vermelha">
-            
-          </div>
-
-          <div class="palette" aria-label="Paleta de cores aproximada">
-
-          </div>
-
+        <div class="identity-img-wrap">
+          <img src="MY27_Tallboy_CC_GX_AXS_GlossMidnightViolet_625ef38d-c701-4d0b-a63c-46303fff1927.webp" alt="Santa Cruz Tallboy CC em violeta">
         </div>
 
       </div>
@@ -949,15 +1534,15 @@
     </section>
 
     <section
-      class="section section--dark"
+      class="section section--dark angle-bottom"
       id="tecnologia"
       aria-labelledby="tech-title"
     >
 
-      <div class="container">
+      <div class="container" data-num="03">
 
         <p class="eyebrow">
-          03 — Engenharia
+          Engenharia
         </p>
 
         <h2 id="tech-title">
@@ -1037,14 +1622,14 @@
       aria-labelledby="models-title"
     >
 
-      <div class="container">
+      <div class="container" data-num="04">
 
         <div class="section-head">
 
           <div>
 
             <p class="eyebrow">
-              04 — Portfólio
+              Portfólio
             </p>
 
             <h2 id="models-title">
@@ -1068,7 +1653,7 @@
             <div class="model-media">
 
               <img
-                src="images.jpeg"
+                src="images.png"
                 alt="Santa Cruz Megatower em tom cinza"
               >
 
@@ -1099,7 +1684,7 @@
             <div class="model-media">
 
               <img
-                src="bikeazul.jpeg"
+                src="bikeazul.png"
                 alt="Santa Cruz Bronson em tom azul"
               >
 
@@ -1130,7 +1715,7 @@
             <div class="model-media">
 
               <img
-                src="bikeverde.jpeg"
+                src="bikeverde.png"
                 alt="Santa Cruz Hightower em tom verde"
               >
 
@@ -1161,8 +1746,8 @@
             <div class="model-media">
 
               <img
-                src="santa-cruz-v10-8-cc-mx-24-dh-s-574146-1.jpegF"
-                alt="Santa Cruz V10 em tom vermelho"
+                src="MY27_V10_CC_DH_X01_GlossLiquidBlue_94533f3d-0ffa-4de3-a2a5-4c82f387363b.webp"
+                alt="Santa Cruz V10 em tom azul marinho"
               >
 
             </div>
@@ -1194,101 +1779,143 @@
 
 
     <section
-      class="section section--gray"
+      class="config-section angle-bottom"
       id="personalizacao"
       aria-labelledby="custom-title"
     >
 
-      <div class="container custom-grid">
+      <div class="container" data-num="05">
 
-        <div>
+        <div class="config-intro">
 
           <p class="eyebrow">
-            05 — Configuração
+            Personalização
           </p>
 
           <h2 id="custom-title">
-            Monte do seu jeito.
+            Cada detalhe, do seu jeito.
           </h2>
 
           <p class="lead">
-            O conceito de bike builder permite combinar opções de cor, carbono,
-            montagem e rodas de acordo com o orçamento e o estilo de pilotagem.
+            O Bike Builder da Santa Cruz permite combinar cor, material do quadro,
+            rodas e transmissão para montar a bike exata que você imaginou.
           </p>
-
-          <ul class="custom-list">
-
-            <li>
-
-              <strong>
-                Cores sazonais
-              </strong>
-
-              As configurações podem alternar entre tons foscos e cores vibrantes,
-              reforçando a exclusividade visual de cada temporada.
-
-            </li>
-
-
-            <li>
-
-              <strong>
-                Build Kits
-              </strong>
-
-              A linha apresentada vai de configurações mais acessíveis até opções premium
-              como GX AXS, X01 e XX1 AXS.
-
-            </li>
-
-
-            <li>
-
-              <strong>
-                Rodas Reserve
-              </strong>
-
-              Na proposta analisada, rodas de carbono podem aparecer como upgrade
-              em configurações premium.
-
-            </li>
-
-
-            <li>
-
-              <strong>
-                Juliana Bicycles
-              </strong>
-
-              A comunicação da marca também apresenta a Juliana como linha integrada
-              voltada ao público feminino.
-
-            </li>
-
-          </ul>
 
         </div>
 
+        <div class="config-blocks">
 
-        <div class="gallery" aria-label="Galeria de bicicletas">
+          <!-- CORES -->
+          <div class="config-block">
 
-          <img
-            src="img/trail-amarela.png"
-            alt="Santa Cruz em acabamento amarelo e verde-água"
-            loading="lazy"
-          >
+            <h3>Cores disponíveis</h3>
 
-          <img
-            src="img/dh-vinho.png"
-            alt="Santa Cruz de downhill em acabamento vinho"
-            loading="lazy"
-          >
+            <div class="color-swatches" role="group" aria-label="Cores disponíveis">
+              <button type="button" class="color-swatch" style="background:#1a1a1a" data-name="Matte Black" aria-label="Matte Black" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#c10000" data-name="Gloss Red" aria-label="Gloss Red" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#f5f5f5;border:1px solid #333" data-name="Gloss White" aria-label="Gloss White" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#3b6b4a" data-name="Gloss Avocado" aria-label="Gloss Avocado" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#2c3e7a" data-name="Gloss Navy" aria-label="Gloss Navy" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#6b2f7a" data-name="Gloss Plum" aria-label="Gloss Plum" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:#c8a800" data-name="Gloss Gold" aria-label="Gloss Gold" aria-pressed="false"></button>
+              <button type="button" class="color-swatch" style="background:linear-gradient(135deg,#2a2a2a 40%,#555 60%)" data-name="Raw Carbon" aria-label="Raw Carbon" aria-pressed="false"></button>
+            </div>
 
-          <img
-            src="img/dh-branca.png"
-            alt="Santa Cruz de downhill branca com detalhes vermelhos"
-            loading="lazy"
-          >
+            <p style="color:#8a8a8a;font-size:.82rem;margin-top:18px;">
+              Cores sazonais — alternância entre acabamentos foscos e brilhosos a cada temporada.
+            </p>
+
+          </div>
+
+          <!-- QUADROS -->
+          <div class="config-block">
+
+            <h3>Materiais de quadro</h3>
+
+            <div class="frame-options">
+
+              <div class="frame-opt">
+                <strong>Alumínio</strong>
+                <span>Alta resistência a impactos. Ideal para iniciantes exigentes e uso intenso.</span>
+              </div>
+
+              <div class="frame-opt">
+                <strong>Carbono C</strong>
+                <span>Mais leve que o alumínio. Rigidez e durabilidade com melhor custo-benefício.</span>
+                <span class="badge">Popular</span>
+              </div>
+
+              <div class="frame-opt">
+                <strong>Carbono CC</strong>
+                <span>Construção premium. Maior leveza e resposta superior para competição.</span>
+                <span class="badge">Top</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- RODAS -->
+          <div class="config-block">
+
+            <h3>Rodas disponíveis</h3>
+
+            <div class="wheel-options">
+
+              <div class="wheel-opt">
+                <strong>Aro 29"</strong>
+                <span>Roda grande para maior estabilidade, rolamento eficiente e ganho nas subidas.</span>
+              </div>
+
+              <div class="wheel-opt">
+                <strong>Aro 27,5"</strong>
+                <span>Mais ágil nas curvas. Resposta mais rápida para trilhas técnicas e apertadas.</span>
+              </div>
+
+              <div class="wheel-opt">
+                <strong>Mullet (29"+27,5")</strong>
+                <span>Combinação híbrida: estabilidade na frente, agilidade atrás. Configuração Bronson.</span>
+              </div>
+
+              <div class="wheel-opt">
+                <strong>Reserve Carbon</strong>
+                <span>Rodas de carbono com garantia vitalícia de substituição. Upgrade premium.</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BUILD KITS -->
+          <div class="config-block">
+
+            <h3>Build Kits</h3>
+
+            <div class="kits-list">
+
+              <div class="kit">
+                <span class="kit-name">S</span>
+                <span class="kit-desc">Entrada de linha — componentes SRAM SX / NX</span>
+              </div>
+
+              <div class="kit">
+                <span class="kit-name">R</span>
+                <span class="kit-desc">Equilíbrio custo-performance — SRAM GX / Deore</span>
+              </div>
+
+              <div class="kit">
+                <span class="kit-name">X01 AXS</span>
+                <span class="kit-desc">Transmissão eletrônica sem fio — SRAM X01 Eagle AXS</span>
+              </div>
+
+              <div class="kit">
+                <span class="kit-name">XX1 AXS</span>
+                <span class="kit-desc">Configuração de competição — SRAM XX1 Eagle AXS + Reserve</span>
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
 
@@ -1298,143 +1925,55 @@
 
 
     <section
-      class="section"
+      class="experience-dark"
       id="experiencia"
       aria-labelledby="experience-title"
     >
 
       <div class="container">
 
-        <p class="eyebrow">
-          06 — Público e experiência
-        </p>
+        <div class="experience-banner" data-num="06">
 
-        <h2 id="experience-title">
-          Construída para quem pesquisa antes de escolher.
-        </h2>
+          <div>
+            <p class="eyebrow">Público e experiência</p>
+            <h2 id="experience-title">
+              Construída para quem pesquisa antes de escolher.
+            </h2>
+          </div>
 
-        <p class="lead">
-          A análise fornecida descreve uma experiência voltada a consumidores interessados
-          em desempenho, especificações, comparações e possibilidades de configuração.
-        </p>
+          <p>
+            A Santa Cruz atende um consumidor que não compra por impulso — ele estuda,
+            compara, lê especificações e só decide quando tem certeza. A marca apoia essa
+            jornada com informação técnica densa, comparativos de build e garantias transparentes.
+          </p>
 
+        </div>
 
-        <div class="info-grid">
+        <div class="journey-steps">
 
-          <article class="info-card">
+          <div class="journey-step">
+            <div class="step-num">01</div>
+            <h4>Descoberta</h4>
+            <p>Atletas, reviews e competições apresentam a marca ao público que ainda não conhece o produto.</p>
+          </div>
 
-            <h3>
-              Público-alvo
-            </h3>
+          <div class="journey-step">
+            <div class="step-num">02</div>
+            <h4>Pesquisa</h4>
+            <p>Comparação de modelos, geometrias, materiais de quadro e build kits em detalhe técnico.</p>
+          </div>
 
-            <ul>
+          <div class="journey-step">
+            <div class="step-num">03</div>
+            <h4>Configuração</h4>
+            <p>Bike Builder permite montar a combinação exata de cor, quadro, rodas e transmissão.</p>
+          </div>
 
-              <li>
-                Entusiastas do ciclismo off-road.
-              </li>
-
-              <li>
-                Atletas amadores e profissionais.
-              </li>
-
-              <li>
-                Consumidores que valorizam desempenho, durabilidade e exclusividade.
-              </li>
-
-              <li>
-                Público com interesse em detalhes técnicos, upgrades e configurações.
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <article class="info-card">
-
-            <h3>
-              Experiência de navegação
-            </h3>
-
-            <ul>
-
-              <li>
-                Menu organizado por categorias e estilos de pilotagem.
-              </li>
-
-              <li>
-                Jornada visual iniciada pelo hero e aprofundada nos modelos.
-              </li>
-
-              <li>
-                Uso de cards e blocos técnicos para facilitar a exploração.
-              </li>
-
-              <li>
-                Predominância de preto, branco, cinza e pontos de vermelho.
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <article class="info-card">
-
-            <h3>
-              Marketing e conversão
-            </h3>
-
-            <ul>
-
-              <li>
-                CTAs voltados à descoberta e personalização.
-              </li>
-
-              <li>
-                Ênfase em engenharia, componentes e desempenho.
-              </li>
-
-              <li>
-                Uso de competição e atletas como elementos de autoridade.
-              </li>
-
-              <li>
-                Destaque para garantia e exclusividade de configurações.
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <article class="info-card">
-
-            <h3>
-              Objetivo da página
-            </h3>
-
-            <ul>
-
-              <li>
-                Fortalecer a percepção de marca.
-              </li>
-
-              <li>
-                Apresentar produtos e tecnologias.
-              </li>
-
-              <li>
-                Educar o consumidor sobre configurações.
-              </li>
-
-              <li>
-                Direcionar o visitante para canais comerciais e revendedores.
-              </li>
-
-            </ul>
-
-          </article>
+          <div class="journey-step">
+            <div class="step-num">04</div>
+            <h4>Decisão</h4>
+            <p>Garantias vitalícias e revendedores especializados fecham o ciclo com segurança.</p>
+          </div>
 
         </div>
 
@@ -1449,14 +1988,23 @@
       aria-labelledby="cta-title"
     >
 
+      <img
+        class="cta-bike"
+        src="MY27_V10_CC_DH_X01_GlossLiquidBlue_94533f3d-0ffa-4de3-a2a5-4c82f387363b.webp"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      >
+
       <div class="container">
 
-        <p class="eyebrow" style="color:#fff">
-          07 — Próxima experiência
+        <p class="eyebrow">
+          Próxima experiência
         </p>
 
         <h2 id="cta-title">
-          Encontre a sua Santa Cruz.
+          Encontre a sua<br>
+          Santa Cruz<span class="dot">.</span>
         </h2>
 
         <p class="lead">
@@ -1464,14 +2012,20 @@
           de personalização apresentadas pela marca.
         </p>
 
-        <a
-          class="button"
-          href="https://www.santacruzbikes.com.br/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Visitar site oficial
-        </a>
+        <div class="cta-actions">
+          <a
+            class="button"
+            href="https://www.santacruzbikes.com.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visitar site oficial
+          </a>
+
+          <a class="button button--light" href="#modelos">
+            Rever modelos
+          </a>
+        </div>
 
       </div>
 
@@ -1489,14 +2043,18 @@
         <div>
 
           <img
-            src="img/logo.png"
+            class="footer-logo"
+            src="logo-santacruz-branco.png"
             alt="Santa Cruz Bicycles"
-            style="width:190px; margin-bottom:15px"
           >
 
-          <p>
-            Landing page acadêmica inspirada no material de análise fornecido
-            sobre a Santa Cruz Bicycles.
+          <p style="font-size:.88rem;line-height:1.6">
+            Landing page acadêmica inspirada na identidade da Santa Cruz Bicycles,
+            marca de mountain bikes de alta performance fundada em 1994.
+          </p>
+
+          <p class="footer-tagline">
+            "Bicicletas que não quebram e que entregam a melhor experiência de pilotagem possível."
           </p>
 
         </div>
@@ -1504,36 +2062,15 @@
 
         <div>
 
-          <h4>
-            Navegação
-          </h4>
+          <h4>Navegação</h4>
 
           <ul>
-
-            <li>
-              <a href="#marca">
-                A marca
-              </a>
-            </li>
-
-            <li>
-              <a href="#identidade">
-                Identidade visual
-              </a>
-            </li>
-
-            <li>
-              <a href="#tecnologia">
-                Tecnologia
-              </a>
-            </li>
-
-            <li>
-              <a href="#modelos">
-                Modelos
-              </a>
-            </li>
-
+            <li><a href="#marca">A marca</a></li>
+            <li><a href="#identidade">Identidade visual</a></li>
+            <li><a href="#tecnologia">Tecnologia</a></li>
+            <li><a href="#modelos">Modelos</a></li>
+            <li><a href="#personalizacao">Personalização</a></li>
+            <li><a href="#contato">Contato</a></li>
           </ul>
 
         </div>
@@ -1541,48 +2078,80 @@
 
         <div>
 
-          <h4>
-            Fontes
-          </h4>
+          <h4>Fontes</h4>
 
           <ul>
-
             <li>
-              <a
-                href="https://www.santacruzbikes.com.br/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.santacruzbikes.com.br/" target="_blank" rel="noopener noreferrer">
                 Santa Cruz Bicycles Brasil
               </a>
             </li>
-
             <li>
-              <a
-                href="https://www.santacruzbicycles.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.santacruzbicycles.com/" target="_blank" rel="noopener noreferrer">
                 Santa Cruz Bicycles Global
               </a>
             </li>
-
           </ul>
+
+          <h4 style="margin-top:24px">Sobre</h4>
+          <p style="font-size:.82rem;line-height:1.6">
+            Exercício acadêmico de análise e recriação de identidade visual.
+            Marca, logotipo e imagens pertencem aos respectivos proprietários.
+          </p>
 
         </div>
 
       </div>
 
 
-      <div class="sources">
-        Página desenvolvida como exercício acadêmico.
-        Conteúdo baseado no material de análise fornecido.
-        Marca, logotipo e imagens pertencem aos seus respectivos proprietários.
+      <div class="footer-bottom">
+        <span>© 2026 — Exercício Acadêmico</span>
+        <span>Santa Cruz Bicycles · Feitas para não quebrar.</span>
       </div>
 
     </div>
 
   </footer>
+
+  <script>
+  (function(){
+    var sel = '.feature,.model,.journey-step,.config-block,.quote-card,.experience-banner,.identity-img-wrap,.section-head';
+    if(!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target;
+        var siblings = Array.prototype.slice.call(el.parentElement.children);
+        var idx = siblings.indexOf(el);
+        el.style.animationDelay = (idx * 70) + 'ms';
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll(sel).forEach(function(el){
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  })();
+
+  (function(){
+    var header = document.querySelector('.site-header');
+    function onScroll(){
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+
+    var swatches = document.querySelectorAll('.color-swatch');
+    swatches.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var wasOn = btn.getAttribute('aria-pressed') === 'true';
+        swatches.forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', wasOn ? 'false' : 'true');
+      });
+    });
+  })();
+  </script>
 
 </body>
 </html>
